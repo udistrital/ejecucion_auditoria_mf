@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ejecucionauditoriamf'`, () => {
+  it(`should have as title 'ejecucion_auditoria_mf'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ejecucionauditoriamf');
+    expect(app.title).toEqual('ejecucion_auditoria_mf');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('ejecucionauditoriamf app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('ejecucion_auditoria_mf app is running!');
   });
 });

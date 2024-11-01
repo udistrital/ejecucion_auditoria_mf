@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ejecucionauditoriamf": {
+    "ejecucion_auditoria_mf": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -11,11 +11,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/ejecucionauditoriamf",
+            "outputPath": "dist/ejecucion_auditoria_mf",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "main": "src/main.single-spa.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -25,9 +25,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/styles/theme.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "extra-webpack.config.js",
+              "libraryName": "ejecucion_auditoria_mf",
+              "libraryTarget": "umd"
+            },
+            "deployUrl": "http://localhost:4204/"
           },
           "configurations": {
             "production": {
@@ -43,7 +49,7 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "none"
             },
             "development": {
               "buildOptimizer": false,
@@ -51,19 +57,26 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "outputHashing": "none",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ejecucionauditoriamf:build:production"
+              "browserTarget": "ejecucion_auditoria_mf:build:production"
             },
             "development": {
-              "browserTarget": "ejecucionauditoriamf:build:development"
+              "browserTarget": "ejecucion_auditoria_mf:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ejecucionauditoriamf:build"
+            "browserTarget": "ejecucion_auditoria_mf:build"
           }
         },
         "test": {
