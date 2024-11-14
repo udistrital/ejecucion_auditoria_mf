@@ -3,14 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuditoriasInternasComponent } from './modules/auditorias-internas/auditorias-internas.component';
+
+import { AuditoriasInternasModule } from './modules/auditorias-internas/auditorias-internas.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AuditoriasInternasModule
   ],
   providers: [],
   bootstrap: [AppComponent]
