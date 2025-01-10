@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuditoriasInternasComponent } from './modules/auditorias-internas/auditorias-internas.component';
+import { AuthGuard } from './core/_guards/auth.guard';
 
 import { APP_BASE_HREF } from '@angular/common';
 
 const routes: Routes = [
   {
-    path: "auditorias-internas",
-    component: AuditoriasInternasComponent
+    path: "ejecucion",
+    // canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./modules/ejecucion/ejecucion.module").then(
+        (m) => m.EjecucionModule
+      ),
   }
 ];
 

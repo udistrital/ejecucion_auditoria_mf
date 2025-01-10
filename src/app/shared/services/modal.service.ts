@@ -14,10 +14,14 @@ export class ModalService {
     titulo: string): void {
     Swal.fire({
       title: titulo.toUpperCase(),
-      text: mensaje,
+      html: mensaje,
       icon: icono,
-      confirmButtonText: 'OK',
-      confirmButtonColor: 'rgb(100, 21, 21)',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: 'rgb(47, 165, 244)',
+      customClass: {
+        popup: 'anchoModal',
+        htmlContainer: 'barraModal',
+      }
     });
   }
 
@@ -26,14 +30,14 @@ export class ModalService {
     icono: 'success' | 'error' | 'warning' | 'info', 
     titulo: string): Promise<any> {
     return Swal.fire({
-      title: titulo.toUpperCase(),
+      title: titulo,
       text: mensaje,
       icon: icono,
       showCancelButton: true,
-      confirmButtonText: 'Eliminar',
-      confirmButtonColor: 'rgb(100, 21, 21)',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: 'rgb(47, 165, 244)',
       cancelButtonText: 'Cancelar',
-      cancelButtonColor: 'rgb(100, 21, 21)',
+      cancelButtonColor: 'rgb(248, 24, 22)',
     });  
   }  
 }
