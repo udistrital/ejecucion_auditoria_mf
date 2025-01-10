@@ -1,36 +1,49 @@
-<mat-card class="custom-card">
-    <mat-card-header>
-      <mat-card-title>Ver Documentos</mat-card-title>
-    </mat-card-header>
-    <mat-divider class="divider"></mat-divider>
-  
-    <div id="descargarBtn">
-      <button mat-button color="primary">
-        Descargar Todo <mat-icon>insert_drive_file</mat-icon>
-      </button>
-    </div>
-  
-    <mat-card-content>
-      <div class="content">      
-        <div class="table-container">
-          <mat-table [dataSource]="botonesData">          
-            <ng-container matColumnDef="Nombre">
-              <mat-cell *matCellDef="let element"> {{ element.Nombre }} </mat-cell>
-            </ng-container>
-            <mat-row *matRowDef="let row; columns: ['Nombre'];" (click)="seleccionarOpcion(row)"
-              [ngClass]="{'selected': opcionSeleccionada === row, 'unselected': opcionSeleccionada !== row}">
-            </mat-row>
-          </mat-table>
+<plantilla-tarjeta-contenedora
+  [title]="'Auditorías internas'"
+  [breadcrumb]="
+    '<p>Gestión Auditoría / Ejecución / <b>Auditorías Internas</b></p>'
+  "
+  [contenido]="contenidoDePlantilla"
+></plantilla-tarjeta-contenedora>
+
+<ng-template #contenidoDePlantilla>
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="vigenciaForm">
+        <div class="row">
+          <mat-form-field class="col-md-4 col-12 mt-4" appearance="outline">
+            <mat-label>Seleccione una vigencia:</mat-label>
+            <mat-icon color="primary" matPrefix>today</mat-icon>
+            <mat-select
+              formControlName="vigencia"
+              (selectionChange)="mostrarAuditoriasPorVigencia($event.value)"
+              color="primary"
+            >
+              <mat-option disabled value="">--Seleccionar--</mat-option>
+              <mat-option
+                *ngFor="let vigencia of vigencias"
+                [value]="vigencia"
+                >{{ vigencia.Nombre }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <div class="col-md-8 col-12 d-flex align-items-center centrar-md">
+            <mat-icon color="primary" class="me-2">info</mat-icon>
+            <p style="font-size: 14px">
+              Se cargarán las auditorías correspondientes a la vigencia
+              seleccionada.
+            </p>
+          </div>
         </div>
-        <!-- <div class="pdf-container">
-          <app-pdf-visualizador [base64Document]="documento" width="100%" height="100%"></app-pdf-visualizador>
-        </div> -->
-      </div>
-  
-      <div class="button_down">
-        <button mat-raised-button color="primary">Respuesta Priliminar</button>
-        <button mat-raised-button color="primary">Enviar</button>
-      </div>
-    </mat-card-content>
-  </mat-card>
-  
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <app-tabla-auditorias-internas
+        [vigenciaId]="vigenciaSeleccionada"
+      ></app-tabla-auditorias-internas>
+    </div>
+  </div>
+</ng-template>

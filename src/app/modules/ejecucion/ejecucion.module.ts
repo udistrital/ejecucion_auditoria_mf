@@ -6,14 +6,17 @@ import { AuditoriasInternasComponent } from './components/auditorias-internas/au
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EjecucionRoutingModule } from './ejecucion-routing.module';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
-
+import { EditarInformeComponent } from './components/auditorias-internas/editar-informe/editar-informe.component';
+import { TablaAuditoriasInternasComponent } from './components/auditorias-internas/tabla-auditorias-internas/tabla-auditorias-internas.component';
 
 
 @NgModule({
   declarations: [
     AuditoriasExternasComponent,
     SeguimientoInformesComponent,
-    AuditoriasInternasComponent
+    AuditoriasInternasComponent,
+    EditarInformeComponent,
+    TablaAuditoriasInternasComponent
   ],
   imports: [
     CommonModule,
