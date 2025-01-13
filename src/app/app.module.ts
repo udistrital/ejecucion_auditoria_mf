@@ -1,22 +1,35 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuditoriasInternasComponent } from './modules/auditorias-internas/auditorias-internas.component';
 
-import { AuditoriasInternasModule } from './modules/auditorias-internas/auditorias-internas.module';
+import { PlanAnualAuditoriaService } from "src/app/core/services/plan-anual-auditoria.service";
+
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from "@angular/common/http";
+import { SpinnerIntercerptor } from "./core/intercerptors/spinner.interceptor";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SpinnerComponent } from "./shared/elements/components/spinner/spinner.component";
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, SpinnerComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    AuditoriasInternasModule
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    PlanAnualAuditoriaService,
+    provideHttpClient(withInterceptors([SpinnerIntercerptor])),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
