@@ -18,6 +18,7 @@ import { AlertService } from "src/app/shared/services/alert.service";
 })
 export class TablaAuditoriasInternasComponent {
   @Input() vigenciaId: any;
+  @Input() role: any;
   @ViewChild(MatSort) sort!: MatSort;
 
   auditoriasPorVigencia: Auditoria[] = [];
@@ -45,6 +46,7 @@ export class TablaAuditoriasInternasComponent {
     limit: number = this.itemsPerPage[0],
     offset: number = 0
   ) {
+    console.log(this.role)
     this.auditoriasPorVigencia = [];
     this.planAuditoriaMid
       .get(
@@ -106,7 +108,6 @@ export class TablaAuditoriasInternasComponent {
   }
 
   editarInforme(auditoria: Auditoria) {
-    console.log("cmbio!!")
     const auditoriaId = auditoria._id;
     this.router.navigate([
       `/ejecucion/auditorias-internas/editar-informe/${auditoriaId}`,
