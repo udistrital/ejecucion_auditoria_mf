@@ -1,7 +1,7 @@
 <plantilla-tarjeta-contenedora
-  [title]="'Editar Auditoría'"
+  [title]="''"
   [breadcrumb]="
-    '<p>Gestión Auditoría / Ejecución / Auditorías Internas / <b>Editar Auditoría</b></p>'
+    '<p>Gestión Auditoría / Ejecución / Auditorías Internas </p>'
   "
   [contenido]="contenidoDePlantilla"
   (regresar)="regresarRuta()"
@@ -33,14 +33,21 @@
               </div>
               <div class="mx-3">
                 <h2>Información</h2>
-                Informacion general del informe
+                Informacion general de la Auditoría
               </div>
             </div>
-            <div class="mt-4">
+            <div *ngIf="formularioInformacion != null" class="mt-4">
+              <app-formulario-dinamico
+                #formularioInformacionComp
+                [formulario]="formularioInformacion"
+                (submitFormulario)="preguntarGuardadoInformacion($event)"
+              >
+              </app-formulario-dinamico>
               <div class="d-flex justify-content-end mt-4">
                 <button
                   mat-raised-button
                   color="primary"
+                  (click)="enviarFormInformacion()"
                 >
                   Guardar y continuar
                 </button>
@@ -60,17 +67,22 @@
               </div>
               <div class="mx-3">
                 <h2>Aspectos Generales</h2>
-                Aspectos generales del informe
+                Aspectos generales
               </div>
             </div>
-            <div class="d-flex justify-content-end mt-4">
-              <button matStepperPrevious mat-stroked-button color="primary">
-                Volver
-              </button>
-              <button matStepperNext mat-flat-button color="primary" class="mx-2">
-                Guardar y continuar
-              </button>
-            </div>
+            <div  class="mt-4">
+              <form [formGroup]="form" (ngSubmit)="onSubmitAspectosGenerales()">
+                <app-editor-enriquecido formControlName="contenido" placeholder="Edita tu texto..."></app-editor-enriquecido>
+                <div class="d-flex justify-content-end mt-4">
+                  <button matStepperPrevious mat-stroked-button color="primary">
+                    Volver
+                  </button>
+                  <button matStepperNext mat-flat-button color="primary" type="submit" class="mx-2">
+                    Guardar y continuar
+                  </button>
+                </div>
+              </form>
+            </div>         
           </mat-step>
   
           <!-- Paso 3: Aspectos Evaluados -->
@@ -85,11 +97,12 @@
               </div>
               <div class="mx-3">
                 <h2>Aspectos Evaluados</h2>
-                Aspectos evaluados del informe
+                Aspectos evaluados 
               </div>
             </div>
             <div  class="mt-4">
-              <div class="d-flex justify-content-end mt-4">
+              <app-aspectos-evaluados></app-aspectos-evaluados>
+              <div class="d-flex justify-content-end mt-4">        
                 <button mat-stroked-button color="primary" matStepperPrevious>
                   Volver
                 </button>
@@ -116,9 +129,11 @@
               </div>
               <div class="mx-3">
                 <h2>Resumen de Hallazgos</h2>
-                Resumen de hallazgos del informe
+                Resumen de hallazgos 
               </div>
             </div>
+            <div  class="mt-4">
+            <app-resumen-hallazgos></app-resumen-hallazgos>
             <div class="d-flex justify-content-end mt-4">
               <button matStepperPrevious mat-stroked-button color="primary">
                 Volver
@@ -126,6 +141,7 @@
               <button matStepperNext mat-flat-button color="primary" class="mx-2">
                 Guardar y cerrar
               </button>
+            </div>
             </div>
           </mat-step>
 
@@ -141,17 +157,22 @@
               </div>
               <div class="mx-3">
                 <h2>Respuesta Preliminar</h2>
-                Respuesta preliminar del informe
+                Respuesta preliminar 
               </div>
             </div>
-            <div class="d-flex justify-content-end mt-4">
-              <button matStepperPrevious mat-stroked-button color="primary">
-                Volver
-              </button>
-              <button matStepperNext mat-flat-button color="primary" class="mx-2">
-                Guardar y cerrar
-              </button>
-            </div>
+            <div  class="mt-4">
+              <form [formGroup]="formRespuestaPreliminar" (ngSubmit)="onSubmitRespuestaPreliminar()">
+                <app-editor-enriquecido formControlName="contenido" placeholder="Edita tu texto..."></app-editor-enriquecido>
+                <div class="d-flex justify-content-end mt-4">
+                  <button matStepperPrevious mat-stroked-button color="primary">
+                    Volver
+                  </button>
+                  <button matStepperNext mat-flat-button color="primary" type="submit" class="mx-2">
+                    Guardar y continuar
+                  </button>
+                </div>
+              </form>
+            </div>        
           </mat-step>
 
           <!-- Paso 6: Informe Final -->
@@ -166,16 +187,30 @@
               </div>
               <div class="mx-3">
                 <h2>Informe Final</h2>
-                Informe final del informe
+                Informe final 
               </div>
             </div>
-            <div class="d-flex justify-content-end mt-4">
-              <button matStepperPrevious mat-stroked-button color="primary">
-                Volver
-              </button>
-              <button matStepperNext mat-flat-button color="primary" class="mx-2">
-                Guardar y cerrar
-              </button>
+            <div class="mt-4">
+              <form [formGroup]="formInformeFinal" (ngSubmit)="onSubmitInformeFinal()">
+                <h3 style="color: var(--primary)" class="my-2">Informe final</h3>
+                <app-editor-enriquecido formControlName="informe" placeholder="Edita tu texto..."></app-editor-enriquecido>
+                <hr class="my-2 separador">
+
+                <h3 style="color: var(--primary)" class="my-2">Observaciones y Conclusiones</h3>
+                <app-editor-enriquecido formControlName="observaciones" placeholder="Edita tu texto..."></app-editor-enriquecido>
+                <hr class="my-2 separador" >
+                
+                <h3 style="color: var(--primary)" class="my-2">Notas</h3>
+                <app-editor-enriquecido formControlName="notas" placeholder="Edita tu texto..."></app-editor-enriquecido>
+                <div class="d-flex justify-content-end mt-4">
+                  <button matStepperPrevious mat-stroked-button color="primary">
+                    Volver
+                  </button>
+                  <button matStepperNext mat-flat-button color="primary" type="submit" class="mx-2">
+                    Guardar y continuar
+                  </button>
+                </div>
+              </form>
             </div>
           </mat-step>
         </mat-stepper>

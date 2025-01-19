@@ -8,6 +8,9 @@ import { EjecucionRoutingModule } from './ejecucion-routing.module';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { EditarInformeComponent } from './components/auditorias-internas/editar-informe/editar-informe.component';
 import { TablaAuditoriasInternasComponent } from './components/auditorias-internas/tabla-auditorias-internas/tabla-auditorias-internas.component';
+import { AspectosGeneralesComponent } from './components/auditorias-internas/editar-informe/aspectos-generales/aspectos-generales.component';
+import { AspectosEvaluadosComponent } from './components/auditorias-internas/editar-informe/aspectos-evaluados/aspectos-evaluados.component';
+import { ResumenHallazgosComponent } from './components/auditorias-internas/editar-informe/resumen-hallazgos/resumen-hallazgos.component';
 
 
 @NgModule({
@@ -16,13 +19,16 @@ import { TablaAuditoriasInternasComponent } from './components/auditorias-intern
     SeguimientoInformesComponent,
     AuditoriasInternasComponent,
     EditarInformeComponent,
-    TablaAuditoriasInternasComponent
+    TablaAuditoriasInternasComponent,
+    AspectosGeneralesComponent,
+    AspectosEvaluadosComponent,
+    ResumenHallazgosComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     EjecucionRoutingModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class EjecucionModule { }

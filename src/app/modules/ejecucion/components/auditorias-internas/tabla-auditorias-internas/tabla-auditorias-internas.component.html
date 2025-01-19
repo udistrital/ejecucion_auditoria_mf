@@ -30,13 +30,23 @@
                       <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                      <button (click)="editarInforme(row)" mat-menu-item>
-                        <mat-icon color="primary">edit</mat-icon> Editar Informe
-                      </button>
-                      <button mat-menu-item>
-                        <mat-icon color="primary">send</mat-icon> Enviar
-                        Aprobación Jefe OCI
-                      </button>
+                      <ng-container [ngSwitch]="role">
+                        <ng-container *ngSwitchCase="'auditor'">
+                          <button (click)="editarInforme(row)" mat-menu-item>
+                            <mat-icon color="primary">edit</mat-icon> Editar Informe
+                          </button>
+                          <button mat-menu-item>
+                            <mat-icon color="primary">send</mat-icon> Enviar
+                            Aprobación Jefe OCI
+                          </button>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'jefe' || 'secretario'">
+                          <button mat-menu-item>
+                            <mat-icon color="primary">send</mat-icon> Enviar
+                            Aprobación secretario
+                          </button>
+                        </ng-container>
+                      </ng-container>
                     </mat-menu>
                   </div>
             

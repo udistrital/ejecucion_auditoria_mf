@@ -12,6 +12,8 @@ import { PlantillaModalComponent } from "./elements/templates/plantilla-modal/pl
 import { ModalVerDocumentoComponent } from "./elements/components/dialogs/modal-ver-documento/modal-ver-documento.component";
 import { MatPaginatorIntl } from "@angular/material/paginator";
 import { CustomPaginadorIntl } from "./services/custom-paginador.service";
+import { EditorEnriquecidoComponent } from './elements/components/editor-enriquecido/editor-enriquecido.component';
+import { QuillModule } from "ngx-quill";
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { CustomPaginadorIntl } from "./services/custom-paginador.service";
     ModalVerDocumentoComponent,
     PlantillaTarjetaContenedoraComponent,
     PlantillaModalComponent,
+    EditorEnriquecidoComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +30,7 @@ import { CustomPaginadorIntl } from "./services/custom-paginador.service";
     MaterialModule,
     ReactiveFormsModule,
     PdfViewerModule,
+    QuillModule.forRoot(),
   ],
   exports: [
     //Componentes
@@ -35,6 +39,7 @@ import { CustomPaginadorIntl } from "./services/custom-paginador.service";
     ModalVerDocumentoComponent,
     PlantillaTarjetaContenedoraComponent,
     PlantillaModalComponent,
+    EditorEnriquecidoComponent,
     //modulos
     FormsModule,
     DragDropModule,
